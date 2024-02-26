@@ -21,7 +21,17 @@ static #set ={
 static #y = { t:[]  } 
 static #remove = {wonSet:[]}
 static #adminSet = {  kindSet :[], wonset:[]  }  
-static #getUser(data, fildes) {
+
+static getUser(...fildes) {
+  return fs.
+  readFile("./src/database/users.json")
+  .then((data) => {
+  return this.#getUser(data, fildes)
+  }) 
+  .catch((err) => console.error())
+  }
+
+ static #getUser(data, fildes) {
   const users = JSON.parse(data)
   
   const newUsers = fildes.reduce((newUsers, filde ) =>{
@@ -30,14 +40,7 @@ static #getUser(data, fildes) {
    },{}) 
   return newUsers;   
   }   
-  static getUser(...fildes) {
-  return fs.
-  readFile("./src/database/users.json")
-  .then((data) => {
-  return this.#getUser(data, fildes)
-  }) 
-  .catch((err) => console.error())
-  }
+  
 
   static async first (){ 
     return fs.
